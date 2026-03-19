@@ -1,4 +1,4 @@
-[![Discord](https://img.shields.io/discord/1234567890?label=Discord&logo=discord&logoColor=white&color=5865F2)](https://discord.gg/qdmSv7usbJ)
+[![Discord](https://img.shields.io/discord/480618281189773314?label=Discord&logo=discord&logoColor=white&color=5865F2)](https://discord.gg/qdmSv7usbJ)
 [![GitHub](https://img.shields.io/badge/GitHub-DeathBan-181717?logo=github)](https://github.com/ourhthrtyhjtyjty/DeathBan)
 [![Minecraft](https://img.shields.io/badge/Minecraft-1.13--1.21.x-62B47A)](https://github.com/ourhthrtyhjtyjty/DeathBan)
 [![Folia](https://img.shields.io/badge/Folia-Supported-blue)](https://github.com/ourhthrtyhjtyjty/DeathBan)
