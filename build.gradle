@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'io.freefair.lombok' version '8.6'
+}
+
+group 'sh.okx'
+version '1.1.1'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.papermc.io/repository/maven-public/' }
+    maven { url 'https://hub.spigotmc.org/nexus/content/groups/public/' }
+    maven { url 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
+}
+
+dependencies {
+    // Paper 1.20.4 API — compiled for Java 17, runs unchanged on Java 21 servers (1.20.5–1.21.x).
+    // Covers Bukkit, Spigot, Paper, Purpur, and Folia across all target versions.
+    compileOnly 'io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT'
+    compileOnly 'me.clip:placeholderapi:2.11.6'
+
+    // Shaded dependencies bundled into the final JAR
+    implementation 'org.xerial:sqlite-jdbc:3.45.3.0'
+    implementation 'org.bstats:bstats-bukkit:3.0.2'
+
+    testImplementation 'junit:junit:4.13.2'
+}
+
+shadowJar {
+    archiveClassifier.set('')
+
+    // NOTE: org.sqlite MUST NOT be relocated. SQLite JDBC loads its native library (.dll/.so)
+    // via JNI, and the native function names are bound to the original Java class path at
+    // compile time (e.g. Java_org_sqlite_core_NativeDB__open_utf8). Relocating the Java
+    // classes without recompiling the native library causes UnsatisfiedLinkError at startup.
+    // Plugin ClassLoaders are isolated, so leaving it unrelocated does not cause conflicts.
+    relocate 'org.bstats', 'sh.okx.deathban.libs.bstats'
+
+    // Gson and Guava are already bundled by the server at runtime
+    dependencies {
+        exclude(dependency('com.google.code.gson:gson:.*'))
+        exclude(dependency('com.google.guava:guava:.*'))
+    }
+}
+
+// Make 'build' produce the shadow jar automatically
+assemble.dependsOn shadowJar
