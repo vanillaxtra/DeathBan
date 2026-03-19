@@ -1,7 +1,7 @@
 [![Discord](https://img.shields.io/discord/480618281189773314?label=Discord&logo=discord&logoColor=white&color=5865F2)](https://discord.gg/qdmSv7usbJ)
-[![GitHub](https://img.shields.io/badge/GitHub-DeathBan-181717?logo=github)](https://github.com/ourhthrtyhjtyjty/DeathBan)
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.13--1.21.x-62B47A)](https://github.com/ourhthrtyhjtyjty/DeathBan)
-[![Folia](https://img.shields.io/badge/Folia-Supported-blue)](https://github.com/ourhthrtyhjtyjty/DeathBan)
+[![GitHub](https://img.shields.io/badge/GitHub-DeathBan-181717?logo=github)](https://github.com/vanillaxtra/DeathBan)
+[![Minecraft](https://img.shields.io/badge/Minecraft-1.13--1.21.x-62B47A)](https://github.com/vanillaxtra/DeathBan)
+[![Folia](https://img.shields.io/badge/Folia-Supported-blue)](https://github.com/vanillaxtra/DeathBan)
 
 ---
 
@@ -306,3 +306,10 @@ Any missing config keys are automatically restored from defaults on every reload
 Originally created by **Okx**. This fork modernizes the plugin with Folia support, permanent bans, server-wide announcements, vanilla ban list integration, and full compatibility across all server platforms from 1.13 to 1.21.x.
 
 Join the community: [discord.gg/qdmSv7usbJ](https://discord.gg/qdmSv7usbJ)
+
+---
+
+## 📊 bStats
+
+[![bStats](https://img.shields.io/badge/bStats-Anonymous%20metrics-00A562?logo=google-analytics&logoColor=white)](https://bstats.org/) [![Plugin](https://img.shields.io/badge/bStats%20ID-30324-5865F2)](https://bstats.org/what-is-my-plugin-id)
+

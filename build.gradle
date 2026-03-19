@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'com.gradleup.shadow' version '9.3.1'
     id 'io.freefair.lombok' version '8.6'
 }
 
@@ -28,7 +28,7 @@ dependencies {
 
     // Shaded dependencies bundled into the final JAR
     implementation 'org.xerial:sqlite-jdbc:3.45.3.0'
-    implementation 'org.bstats:bstats-bukkit:3.0.2'
+    implementation 'org.bstats:bstats-bukkit:3.2.1'
 
     testImplementation 'junit:junit:4.13.2'
 }
@@ -41,7 +41,7 @@ shadowJar {
     // compile time (e.g. Java_org_sqlite_core_NativeDB__open_utf8). Relocating the Java
     // classes without recompiling the native library causes UnsatisfiedLinkError at startup.
     // Plugin ClassLoaders are isolated, so leaving it unrelocated does not cause conflicts.
-    relocate 'org.bstats', 'sh.okx.deathban.libs.bstats'
+    relocate 'org.bstats', "${project.group}"
 
     // Gson and Guava are already bundled by the server at runtime
     dependencies {

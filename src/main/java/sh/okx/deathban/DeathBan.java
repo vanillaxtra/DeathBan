@@ -65,7 +65,7 @@ public class DeathBan extends JavaPlugin {
     getCommand("revive").setExecutor(new ReviveCommand(this));
     getCommand("deathban").setExecutor(new DeathBanCommand(this));
 
-    Metrics metrics = new Metrics(this, 3947);
+    Metrics metrics = new Metrics(this, 30324);
     metrics.addCustomChart(new SimplePie("time_format",
         () -> getConfig().getString("time-format").split(" ")[0]));
 
