@@ -311,5 +311,23 @@ Join the community: [discord.gg/qdmSv7usbJ](https://discord.gg/qdmSv7usbJ)
 
 ## 📊 bStats
 
+DeathBan reports anonymous usage to [bStats](https://bstats.org/) (plugin id **30324**, dashboard: [deathbans](https://bstats.org/plugin/bukkit/deathbans/30324)). Data is shared with **every other plugin** that uses bStats via one global file: `plugins/bStats/config.yml`.
+
 [![bStats](https://img.shields.io/badge/bStats-Anonymous%20metrics-00A562?logo=google-analytics&logoColor=white)](https://bstats.org/) [![Plugin](https://img.shields.io/badge/bStats%20ID-30324-5865F2)](https://bstats.org/what-is-my-plugin-id)
+
+### Troubleshooting (no servers / no charts)
+
+1. **Global switch off** — In `plugins/bStats/config.yml`, `enabled` must be `true`. If any admin disabled bStats for the whole server, DeathBan will not send data (this is intentional and required by bStats).
+
+2. **Timing** — The first request is sent after roughly **3–6 minutes**, then about every **30 minutes**. The website also updates on that schedule, so a fresh install can look like “nothing works” for a while.
+
+3. **Console debug** — In the same `config.yml`, temporarily set `logFailedRequests: true` and `logSentData: true`, restart the server, and watch the console. You should see log lines from bStats when a payload is sent or when HTTPS fails (firewall, proxy, or TLS issues).
+
+4. **Use the Shadow JAR** — Install the fat JAR from `./gradlew shadowJar` (`build/libs/DeathBan-*.jar`). A plain compiled JAR without dependencies will not bundle bStats correctly.
+
+5. **On startup** — DeathBan logs: `bStats metrics enabled (service id 30324)...` If you never see that line, the plugin failed earlier during `onEnable()` (check for errors above it in the log).
+
+6. **Folia / Paper** — bStats 3.x detects Folia and avoids the broken main-thread scheduler path; uploads still run from a small daemon thread pool. If uploads fail only on Folia, enable `logFailedRequests` (step 3) and inspect the stack trace.
+
+The distributed JAR relocates `org.bstats` under the `sh.okx` package via Shadow so it does not clash with other plugins’ copies of bStats.
 

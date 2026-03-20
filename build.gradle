@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'sh.okx'
-version '1.1.1'
+version '1.2.0'
 
 java {
     toolchain {
@@ -35,6 +35,12 @@ dependencies {
 
 shadowJar {
     archiveClassifier.set('')
+
+    // bStats + Shadow (Groovy): merge the runtime classpath into the plugin JAR, same intent as
+    //   configurations = project.configurations.runtimeClasspath.map { setOf(it) }
+    // in the Kotlin DSL docs. Do NOT add the sample rule that excludes everything except org.bstats:
+    // this project also shades sqlite-jdbc; that exclude would strip the driver and break storage.
+    configurations = [project.configurations.runtimeClasspath]
 
     // NOTE: org.sqlite MUST NOT be relocated. SQLite JDBC loads its native library (.dll/.so)
     // via JNI, and the native function names are bound to the original Java class path at

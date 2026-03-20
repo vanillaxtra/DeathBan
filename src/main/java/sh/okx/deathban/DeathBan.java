@@ -37,6 +37,9 @@ public class DeathBan extends JavaPlugin {
    */
   private static final long PERMANENT_THRESHOLD = Long.MAX_VALUE / 4;
 
+  /** bStats service id — https://bstats.org/what-is-my-plugin-id */
+  private static final int BSTATS_PLUGIN_ID = 30324;
+
   private Database database;
   private Group defaultGroup;
   private Set<Group> groups;
@@ -65,9 +68,18 @@ public class DeathBan extends JavaPlugin {
     getCommand("revive").setExecutor(new ReviveCommand(this));
     getCommand("deathban").setExecutor(new DeathBanCommand(this));
 
-    Metrics metrics = new Metrics(this, 30324);
-    metrics.addCustomChart(new SimplePie("time_format",
-        () -> getConfig().getString("time-format").split(" ")[0]));
+    int pluginId = BSTATS_PLUGIN_ID;
+    Metrics metrics = new Metrics(this, pluginId);
+    metrics.addCustomChart(new SimplePie("time_format", () -> {
+      String tf = getConfig().getString("time-format");
+      if (tf == null || tf.isEmpty()) {
+        return null;
+      }
+      int space = tf.indexOf(' ');
+      return space > 0 ? tf.substring(0, space) : tf;
+    }));
+    getLogger().info("bStats metrics enabled (service id " + pluginId + "). "
+        + "All plugins share plugins/bStats/config.yml — set logSentData: true there to verify uploads.");
 
     if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
       new DeathBanExpansion(this).register();
